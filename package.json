@@ -1,0 +1,30 @@
+{
+  "name": "dunkin-backend",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.mjs",
+    "start": "node server.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eshelton328/dunkin-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eshelton328/dunkin-backend/issues"
+  },
+  "homepage": "https://github.com/eshelton328/dunkin-backend#readme",
+  "devDependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "mongodb": "4.1",
+    "nodemon": "^2.0.22"
+  }
+}
