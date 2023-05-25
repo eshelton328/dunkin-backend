@@ -1,4 +1,5 @@
 import method from './method.mjs'
+import apiCallTracker from '../utils/apiTracker.mjs';
 
 export const createSourceAccount = async (holderId, accNum, routingNum) => {
     try {
@@ -10,10 +11,13 @@ export const createSourceAccount = async (holderId, accNum, routingNum) => {
                 type: 'checking',
             },
         });
+
+        apiCallTracker.updateApiCount()
         
         return account;
     } catch (error) {
         console.log(error)
+        apiCallTracker.updateApiCount()
         return false;
     }
 }
@@ -28,9 +32,12 @@ export const createDestinationAccount = async (holderId, merchantId, accNum) => 
             },
         })
 
+        apiCallTracker.updateApiCount()
+
         return account;
     } catch (error) {
         console.log(error)
+        apiCallTracker.updateApiCount()
         return false;
     }
 }

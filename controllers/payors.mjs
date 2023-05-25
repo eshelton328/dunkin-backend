@@ -4,60 +4,56 @@ import { createSourceAccount } from "../api/accounts.mjs";
 import { findSourceAccount } from '../utils/findSourceAccount.mjs';
 
 export const createGetPayor = async (payor) => {
-    let apiCalls = 0
     try {
         let payorRec = await getPayorByEIN(payor.ein);
         if (payorRec) {
-            return [payorRec, apiCalls];
+            return payorRec;
         }
 
         const entity = await createCorporateEntity(payor);
-        apiCalls++
         if (!entity) {
-            return [false, apiCalls];
+            return false;
         }
 
         let payorId = await createPayor(payor, entity.id);
         if (!payorId) {
-            return [false, apiCalls];
+            return false;
         }
 
         payorRec = await getPayorByEIN(payor.ein);
         if (payorRec) {
-            return [payorRec, apiCalls];
+            return payorRec;
         }
 
-        return [false, apiCalls];
+        return false;
     } catch (error) {
         console.log(`Helper: there was an issue with createGetPayor - ${error}`);
-        return [false, apiCalls];
+        return false;
     }
 }
 
 export const createGetPayorAccount = async (payor, accNum, abaRouting) => {
-    let apiCalls = 0;
     try {
         const payorAccounts = payor.method.accounts;
         const accountId = findSourceAccount(payorAccounts, accNum, abaRouting);
         if (accountId) {
-            return [accountId, apiCalls]
+            return accountId;
         }
         
         const sourceAcc = await createSourceAccount(payor.method.entityId, accNum, abaRouting)
-        apiCalls++;
         if (!sourceAcc) {
-            return [false, apiCalls];
+            return false;
         }
 
         const id = sourceAcc.id
         const res = await updatePayorBanking(payor._id, { id, accNum, abaRouting })
         if (!res) {
-            return [false, apiCalls];
+            return false;
         }
 
-        return [sourceAcc.id, apiCalls]
+        return sourceAcc.id;
     } catch (error) {
         console.log(`Helper: there was an error with createGetPayorAccount - ${error}`)
-        return [false, apiCalls];
+        return false;
     }
 }

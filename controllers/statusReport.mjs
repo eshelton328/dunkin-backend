@@ -2,12 +2,9 @@ import { getBatchById, updateBatchStatusReport, updateBatchReportNull } from "..
 import { deleteReportByFileName } from "../db/queries/reports.mjs";
 import { createReport } from "../db/queries/reports.mjs";
 import { getPayment } from "../api/payments.mjs";
-import { rateLimit } from "../utils/rateLimit.mjs";
 
 export const getPaymentStatuses = async (payments) => {
     try {
-        let apiCount = 0;
-        let startTime = new Date();
         let result = payments;
         let differnt = [];
         for (let i = 0; i < result.length; i++) {
@@ -17,9 +14,6 @@ export const getPaymentStatuses = async (payments) => {
             if (!updatedPayment) {
                 continue;
             }
-
-            apiCount++
-            [apiCount, startTime] = await rateLimit(apiCount, startTime)
             
             if (JSON.stringify(payment.method) !== JSON.stringify(updatedPayment)) {
                 payment.method = updatedPayment
