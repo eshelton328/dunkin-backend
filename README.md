@@ -10,6 +10,8 @@
 ## Tech Frameworks Used
 * Express
 * MongoDB
+* Bull
+* Node Cron
 
 
 ## Installation
