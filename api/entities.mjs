@@ -1,4 +1,5 @@
 import method from './method.mjs'
+import apiCallTracker from '../utils/apiTracker.mjs';
 
 export const createIndividualEntity = async (employee) => {
     try {
@@ -13,9 +14,13 @@ export const createIndividualEntity = async (employee) => {
                 dob: formattedDob,
             }
         })
+
+        apiCallTracker.updateApiCount()
+
         return entity
     } catch (error) {
         console.log(error)
+        apiCallTracker.updateApiCount()
         return false;
     }
 }
@@ -44,9 +49,12 @@ export const createCorporateEntity = async (payor) => {
             }
         })
 
+        apiCallTracker.updateApiCount()
+
         return entity;
     } catch (error) {
         console.log(error)
+        apiCallTracker.updateApiCount()
         return false;
     }
 }
