@@ -6,8 +6,8 @@ class ApiCallTracker {
             this.timeWindow = 60 * 1000;
             this.maxApiCount = 600;
             ApiCallTracker.instance = this;
-      }
-      return ApiCallTracker.instance;
+        }
+        return ApiCallTracker.instance;
     }
 
     async updateApiCount() {
@@ -32,7 +32,7 @@ class ApiCallTracker {
     getApiCount() {
         return this.apiCount;
     }
-  }
+}
 
 const apiCallTracker = new ApiCallTracker();
 export default apiCallTracker;
