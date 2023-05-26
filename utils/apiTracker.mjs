@@ -9,16 +9,16 @@ class ApiCallTracker {
       }
       return ApiCallTracker.instance;
     }
-  
+
     async updateApiCount() {
         const now = new Date();
         const timeElapsed = now.getTime() - this.startTime.getTime();
-  
+
         if (timeElapsed >= this.timeWindow) {
             this.startTime = new Date();
             this.apiCount = 0;
         }
-  
+
         if (this.apiCount < this.maxApiCount) {
             this.apiCount++;
         } else {
@@ -28,12 +28,11 @@ class ApiCallTracker {
             this.apiCount = 1;
         }
     }
-  
+
     getApiCount() {
         return this.apiCount;
     }
   }
-  
-  const apiCallTracker = new ApiCallTracker();
-  export default apiCallTracker;
-  
+
+const apiCallTracker = new ApiCallTracker();
+export default apiCallTracker;
