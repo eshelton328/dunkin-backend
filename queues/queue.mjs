@@ -2,9 +2,7 @@ import Bull from 'bull';
 
 const queue = new Bull('queue');
 
-queue.empty().then(() => {
-    console.log('Queue has been cleared');
-});
-
+// uncomment and restart server to clear queue
+// queue.obliterate({ force: true });
 
 export default queue;
