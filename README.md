@@ -1,5 +1,5 @@
 # Dunkin Backend
-> Backend repo for method api assessment. Front end repo can be found [here](https://github.com/eshelton328/dunkin-dashboard)
+> Backend repo for method api integration. Front end repo can be found [here](https://github.com/eshelton328/dunkin-dashboard)
 
 
 ❗ This projects requires you to have redis installed on your machine If you are on a mac, you can run:
